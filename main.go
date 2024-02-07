@@ -2,24 +2,35 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
-	"path/filepath"
 	"strings"
 )
 
 func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("Укажите полный путь до файла вторым аргументом")
+	var text string
+
+	if len(os.Args) > 1 {
+		text = strings.Join(os.Args[1:], " ")
+	} else {
+		fmt.Println("Введите предложение в качестве аргумента")
+		return
 	}
 
-	filePth := os.Args[1]
+	textWords := make(map[rune]int)
+	totalWords := 0
 
-	var fileName, fileExt string
+	// Подсчет количества каждой введенной буквы
+	for _, word := range text {
+		if word >= 'a' && word <= 'z' {
+			textWords[word]++
+			totalWords++
+		}
+	}
 
-	fileName = strings.TrimSuffix(filepath.Base(filePth), filepath.Ext(filePth))
-	fileExt = strings.TrimPrefix(filepath.Ext(filePth), ".")
-
-	fmt.Printf("filename: %s\n", fileName)
-	fmt.Printf("extension: %s\n", fileExt)
+	// Посчет доли букв в процентах
+	fmt.Println("Letter - Count - Percentage")
+	for word, count := range textWords {
+		percentage := float64(count) / float64(totalWords) * 100
+		fmt.Printf("%c - %d - %.2f%%\n", word, count, percentage)
+	}
 }
