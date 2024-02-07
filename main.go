@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"unicode"
 )
 
 func main() {
@@ -21,6 +22,7 @@ func main() {
 
 	// Подсчет количества каждой введенной буквы
 	for _, word := range text {
+		word = unicode.ToLower(word)
 		if word >= 'a' && word <= 'z' {
 			textWords[word]++
 			totalWords++
