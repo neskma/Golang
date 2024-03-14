@@ -1,0 +1,2 @@
+Код main_test.go считывает имена с сервера http://localhost:8080/create по строке 30 expectedName := "Имя"
+На скриншоте успешно найдены Anna и Steve, затем ошибка при поиске Egor и далее успешный поиск Timothy
